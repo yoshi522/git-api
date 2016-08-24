@@ -1,8 +1,9 @@
 
 #gif-api
 
-###Usage
+you can get random images gif through this api.
 
+###Usage
 
 Use get method for this url
 `https://gif-api.herokuapp.com/v1/gif`
@@ -19,6 +20,9 @@ and this response like this:
     }
 }
 ```
+
+if you want to see preview, use `https://gif-api.herokuapp.com/v1/gif/preview` instead.
+
 
 
 ###License
