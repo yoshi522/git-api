@@ -1,5 +1,6 @@
 require 'bundler/setup'
 require 'sinatra'
+require 'json'
 
 get '/' do
   code = "<%= Time.now %>"
@@ -14,7 +15,16 @@ end
 get '/v1/gif' do
   num = rand(8) + 1
   @gif_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/gif/git-' + num.to_s + '.gif'
-  erb :gif
+  response = {
+    meta: {
+        status: 200
+    },
+    data: {
+        id: num,
+        link: @gif_url
+    }
+  }
+  response.to_json
 end
 
 get '/v1/gif/preview' do
