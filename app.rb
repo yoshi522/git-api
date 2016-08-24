@@ -3,13 +3,13 @@ require 'sinatra'
 require 'json'
 
 get '/' do
-  code = "<%= Time.now %>"
+  code = "Working normally: Time is <%= Time.now %> now."
   erb code
 end
 
 get '/v1' do
-  @version = 'gif api version is 1.0'
-  erb :v1
+  version = 'gif api version is 1.0'
+  erb version
 end
 
 get '/v1/gif' do
