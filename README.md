@@ -12,7 +12,7 @@ and this response like this:
 ```
 {
     meta: {
-    status: 200
+        status: 200
     },
     data: {
         id: 7,
