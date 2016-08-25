@@ -12,6 +12,7 @@ get '/v1' do
   erb version
 end
 
+# GIF ENDPOINT
 get '/v1/gif' do
   num = rand(8) + 1
   @gif_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/gif/git-' + num.to_s + '.gif'
@@ -33,6 +34,8 @@ get '/v1/gif/preview' do
   erb :preview
 end
 
+
+# IMAGE ENDPOINT
 get '/v1/img' do
   num = rand(10) + 1
   @img_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/img/img-' + num.to_s + '.jpeg'
@@ -54,28 +57,11 @@ get '/v1/img/preview' do
   erb :img_preview
 end
 
-get '/v1/gal/text=:text' do
-  galmap = {"あ" => "a", "い" => "i"} #hash
-  sample = [] #init
-  text = params[:text]
-  arr = text.split("") # make a array based on text
-  @arr = arr
-  arr.each do |txt|
-    galmap.each do |gal, value|
-      if txt == gal
-        txt = value
-        sample.push(txt)
-      elsif txt != gal
-        sample.push(txt)
-      end
-    end
-  end
-  @sample = sample
 
-  erb :gal
-end
+# GAL CONVERTER ENDPOINT
+get '/v1/gal/text=:text' do # TODO: THIS URL ENDPOINT IS NOT GOOD PRACTICE, USE /v1/gal?text=:text
 
-get '/v2/gal/text=:text' do
+  # CONVERTER DICTIONARY
   galmap = {
       'あ' => "ぁ", 'い' => "ﾚヽ", 'う' => "ぅ", 'え' => "ぇ", 'お' => "ぉ",
       'か' => "ｶゝ", 'き' => "ｷ", 'く' => "＜", 'け' => "ﾚﾅ", 'こ' => "〓",
@@ -109,42 +95,34 @@ get '/v2/gal/text=:text' do
       'パ' => "ﾉヽ°", 'ピ' => "ｔ°", 'プ' => "ﾌo", 'ペ' => "∧°", 'ポ' => "朮°",
       'ー' => "→"
   }
-  text = params[:text]
-  arr = text.split("")
+
+  arr = params[:text].split("")
+  # INITIALISE
   resp = []
-  if text != ""
-    arr.map { |i|
-      if /\p{Hiragana}/ =~ i || /\p{Katakana}/ =~ i
-        galmap.each do |key, value|
-          if i == key
-            i = value
-          elsif i != key then
-          end
+  # CONVERT TO GAL SENTENCE
+  arr.map { |i|
+    if /\p{Hiragana}/ =~ i || /\p{Katakana}/ =~ i
+      galmap.each do |key, value|
+        if i == key
+          i = value
+        elsif i != key then
         end
-        resp.push(i)
-      else
-        resp.push(i)
       end
-    }
-    resp1 = resp.join("")
-    response = {
-        meta: {
-            status: 200
-        },
-        data: {
-            content: resp1
-        }
-    }
-    response.to_json
-  else
-    response = {
-        meta: {
-            status: 200
-        },
-        data: {
-            content: 'Invalid request'
-        }
-    }
-    response.to_json
-  end
+      resp.push(i)
+    else
+      resp.push(i)
+    end
+  }
+
+  resp_gal = resp.join("")
+  response = {
+      meta: {
+          status: 200
+      },
+      data: {
+          content: resp_gal
+      }
+  }
+  # RETURN JSON DATA
+  response.to_json
 end

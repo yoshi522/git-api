@@ -1,18 +1,28 @@
 
-#gif-api
+#line-api
 
-you can get random images gif through this api.
+This is a api for line internship 2016, sarry team with using line bot.
 
 ###Usage
 
-Use get http request method for this url  
+Use get http request method for this base url  
+`https://gif-api.herokuapp.com/v1`
+
+
+###Endpoint
 for gif  
-`https://gif-api.herokuapp.com/v1/gif`
+`curl -X GET https://gif-api.herokuapp.com/v1/gif`  
+if you want to see preview, use `https://gif-api.herokuapp.com/v1/gif/preview` instead.
 
 for image  
-`https://gif-api.herokuapp.com/v1/img`  
+`curl -X GET https://gif-api.herokuapp.com/v1/img`  
+if you want to see preview, use `https://gif-api.herokuapp.com/v1/img/preview` instead.
 
-and this response like this:
+for gal text converter  
+`curl -X GET https://gif-api.herokuapp.com/v2/gal/text=[sentence]`  
+You can put sentence in Japanese, then you get converted sentence like as a gal (japanese young female)
+
+the basic response:
 ```
 {
     meta: {
@@ -24,9 +34,6 @@ and this response like this:
     }
 }
 ```
-
-if you want to see preview, use `https://gif-api.herokuapp.com/v1/gif/preview` instead.
-
 
 
 ###License
