@@ -19,10 +19,10 @@ for image
 if you want to see preview, use `https://gif-api.herokuapp.com/v1/img/preview` instead.
 
 for gal text converter  
-`curl -X GET https://gif-api.herokuapp.com/v2/gal/text=[sentence]`  
+`curl -X GET https://gif-api.herokuapp.com/v1/gal/text=[sentence]`  
 You can put sentence in Japanese, then you get converted sentence like as a gal (japanese young female)
 
-the basic response:
+the basic response:  
 ```
 {
     meta: {
