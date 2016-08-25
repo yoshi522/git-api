@@ -2,18 +2,22 @@ require 'bundler/setup'
 require 'sinatra'
 require 'json'
 
+
+ENDPOINT_VERSION = 'v1'
+BASIC_ENDPOINT = '/' + ENDPOINT_VERSION + '/'
+
 get '/' do
   code = "Working normally: Time is <%= Time.now %> now."
   erb code
 end
 
-get '/v1' do
+get '/' + ENDPOINT_VERSION do
   version = 'gif api version is 1.0'
   erb version
 end
 
 # GIF ENDPOINT
-get '/v1/gif' do
+get BASIC_ENDPOINT + 'gif' do
   num = rand(8) + 1
   @gif_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/gif/git-' + num.to_s + '.gif'
   response = {
@@ -28,7 +32,7 @@ get '/v1/gif' do
   response.to_json
 end
 
-get '/v1/gif/preview' do
+get BASIC_ENDPOINT + 'gif/preview' do
   num = rand(8) + 1
   @gif_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/gif/git-' + num.to_s + '.gif'
   erb :preview
@@ -36,7 +40,7 @@ end
 
 
 # IMAGE ENDPOINT
-get '/v1/img' do
+get BASIC_ENDPOINT + 'img' do
   num = rand(10) + 1
   @img_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/img/img-' + num.to_s + '.jpeg'
   response = {
@@ -51,7 +55,7 @@ get '/v1/img' do
   response.to_json
 end
 
-get '/v1/img/preview' do
+get BASIC_ENDPOINT + 'img/preview' do
   num = rand(8) + 1
   @img_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/img/img-' + num.to_s + '.jpeg'
   erb :img_preview
@@ -59,7 +63,7 @@ end
 
 
 # GAL CONVERTER ENDPOINT
-get '/v1/gal/text=:text' do # TODO: THIS URL ENDPOINT IS NOT GOOD PRACTICE, USE /v1/gal?text=:text
+get BASIC_ENDPOINT + 'gal/text=:text' do # TODO: THIS URL ENDPOINT IS NOT GOOD PRACTICE, USE /v1/gal?text=:text
 
   # CONVERTER DICTIONARY
   galmap = {
