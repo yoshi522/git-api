@@ -109,7 +109,6 @@ get BASIC_ENDPOINT + 'gal/text=:text' do # TODO: THIS URL ENDPOINT IS NOT GOOD P
       galmap.each do |key, value|
         if i == key
           i = value
-        elsif i != key then
         end
       end
       resp.push(i)
