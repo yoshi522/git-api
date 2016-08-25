@@ -126,8 +126,16 @@ get '/v2/gal/text=:text' do
         resp.push(i)
       end
     }
-    response = resp.join("")
-    response
+    resp1 = resp.join("")
+    response = {
+        meta: {
+            status: 200
+        },
+        data: {
+            content: resp1
+        }
+    }
+    response.to_json
   else
     response = {
         meta: {
