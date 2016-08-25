@@ -32,3 +32,24 @@ get '/v1/gif/preview' do
   @gif_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/gif/git-' + num.to_s + '.gif'
   erb :preview
 end
+
+get '/v1/img' do
+  num = rand(10) + 1
+  @img_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/img/img-' + num.to_s + '.jpeg'
+  response = {
+      meta: {
+          status: 200
+      },
+      data: {
+          id: num,
+          link: @img_url
+      }
+  }
+  response.to_json
+end
+
+get '/v1/img/preview' do
+  num = rand(8) + 1
+  @img_url = 'https://s3-ap-northeast-1.amazonaws.com/line-bot-2016/img/img-' + num.to_s + '.jpeg'
+  erb :img_preview
+end

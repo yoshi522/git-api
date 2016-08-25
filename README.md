@@ -5,8 +5,12 @@ you can get random images gif through this api.
 
 ###Usage
 
-Use get method for this url
+Use get http request method for this url  
+for gif  
 `https://gif-api.herokuapp.com/v1/gif`
+
+for image  
+`https://gif-api.herokuapp.com/v1/img`  
 
 and this response like this:
 ```
